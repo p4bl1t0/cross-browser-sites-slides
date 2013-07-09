@@ -1,0 +1,29 @@
+.section h2, section h2
+{
+	display:inline-block;
+	zoom: 1;
+    *display: inline;
+}
+.input-field label{
+	display:inline-block;
+	zoom: 1;
+    *display: inline;
+}
+.works li
+{
+	width:46%;
+	margin:0 1%;
+}
+.work-slider-container .inner {
+	width:50%;
+}
+.aptitude li
+{
+	width:29%;
+}
+.floating .home
+{	
+	display:inline-block;
+	zoom: 1;
+    *display: inline;
+}

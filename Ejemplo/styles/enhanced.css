@@ -1,0 +1,122 @@
+/*ENHANCED*/  /*El CSS 3 comienza aquí*/
+.header h1, header h1
+{
+	text-shadow: 8px 9px 4px #000000;
+	filter: dropshadow(color=#000000, offx=8, offy=9); 
+}
+.work-slider-container {
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#334B01), to(#B4DC00)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient(top, #334B01, #B4DC00); /* Chrome 10+, Saf5.1+, iOS 5+ */
+	background-image:    -moz-linear-gradient(top, #334B01, #B4DC00); /* FF3.6 */
+	background-image:     -ms-linear-gradient(top, #334B01, #B4DC00); /* IE10 */
+	background-image:      -o-linear-gradient(top, #334B01, #B4DC00); /* Opera 11.10+ */
+	background-image:         linear-gradient(top, #334B01, #B4DC00);
+				filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#334B01', EndColorStr='#B4DC00'); /* IE6–IE9 */
+}
+#slides {
+    border: 12px solid rgba(255, 255, 255, .4);
+}
+
+.works img
+{
+	border: solid rgba(255, 255, 255, .4);
+	border-width:9px 0;
+}
+.fontface .header h1, .fontface header h1{
+	font-family: 'Yellowtail', cursive;
+}
+.btn{
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+}
+
+@media screen and (min-width: 900x) and (max-width: 1000px) {
+	.inner
+	{
+		width:80%;
+		margin:auto;
+	}
+	/*Aplicar SI Media Query y Ancho mayor 1000*/
+	.header h1, header h1
+	{
+		font-size:250%;
+		position:absolute;
+	}
+	.floating  h1
+	{
+		position:static;
+		display:block;
+	}
+	.inner
+	{
+		width:85%;
+		margin:auto;
+	}
+}
+@media screen and (min-width: 1000px) and (max-width: 1270px) {
+	/*Aplicar SI Media Query y Ancho mayor 1000*/
+	.header h1, header h1
+	{
+		letter-spacing:3px;
+		font-size:350%;
+		position:absolute;
+	}
+	.works li
+	{
+		width:48%;
+		margin:0 1%;
+	}
+	.work-slider-container .inner {
+		width:60%;
+	}
+	.aptitude li
+	{
+		width:31%;
+	}
+	.floating  h1
+	{
+		position:static;
+		display:block;
+	}
+}
+@media screen and (min-width: 1270px) {
+	.inner
+	{
+		width:80%;
+		margin:auto;
+	}
+	/*Aplicar SI Media Query y Ancho mayor 1280*/
+	.header h1, header h1
+	{
+		letter-spacing:6px;
+		font-size:450%;
+		position:absolute;
+	}
+	.works li
+	{
+		width:23%;
+		margin:0 1%;
+	}
+	.work-slider-container .inner {
+		width:60%;
+	}
+	.aptitude li
+	{
+		width:31%;
+	}
+	.floating  h1
+	{
+		position:static;
+		display:block;
+	}
+	#contact-section{
+		min-height:650px;
+	}
+	#work-section{
+		min-height:1000px;
+	}
+	#about-me-section{
+		min-height:800px;
+	}
+}

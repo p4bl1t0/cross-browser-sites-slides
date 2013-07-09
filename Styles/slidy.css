@@ -1,0 +1,198 @@
+html, body 
+{ 
+	height:100%; 
+	width:100%; 
+	overflow:hidden; 
+	position:relative; 
+	margin:0; 
+	padding:0;
+	font-family:Helvetica,Verdana,Arial;
+}
+.mark-position
+{
+	display:block;
+}
+.header h2
+{
+	font-family:'Lucida Sans';
+}
+.section
+{ 	
+	width:100%; 
+	overflow:hidden; 
+	height:100%; 
+	position:relative;
+	top:0;
+	background:white;
+	float:left;
+	margin:0; 
+	padding:0;
+}
+.nav
+{
+	position:absolute;
+	bottom:0;
+	right:0;
+	list-style:none;
+	text-align:right;
+	width:500px;
+	display:block;
+}
+.nav  li
+{
+	display:inline;
+}
+.header
+{
+	padding:1%;
+	width:98%;
+	background:#131281;
+	color:white;
+	height:8%;
+	min-height:45px;
+}
+.header .logo
+{
+	float:left;
+	max-width:20%;
+	width:53px;
+	
+}
+.header h2, .header h3
+{
+	margin:0;
+	float:left;
+	width:70%;
+	max-width:80%;
+}
+.header h3
+{
+	letter-spacing:4px;
+}
+.content
+{	
+	height:88%;
+	overflow:auto;
+	width:100%;
+}
+.content-inner
+{
+	padding:10px;
+}
+.imagen-central
+{
+	display:block;
+	margin:auto;
+	width:35%;
+}
+.presentation-introduction
+{
+	text-align:center;
+}
+.presentation-introduction h1
+{
+	color:#070674;
+}
+.presentation-introduction p
+{
+	margin:3px;
+	color:#070674;
+	font-weight:bold;
+	font-size:180%;
+}
+.content-inner em
+{
+	font-weight:bold;
+}
+.content-inner ul
+{
+	list-style-type:square;
+	color:#259DFF;
+	font-size:150%;
+}
+.content-inner li span
+{
+	color:black;
+	font-size:70%;
+}
+#titulo-grafico-dispersion
+{
+	text-align:center;
+	font-size:120%;
+}
+#grafico-dispersion
+{
+	width:70%;
+	height:300px;
+}
+.grafico-dispersion
+{
+	height:400px;
+	margin:auto;
+}
+
+#collage-slider
+{
+	display:block;
+	list-style-type:none;
+	padding:0;
+	margin:auto;
+}
+.no-JS #collage-slider
+{
+	width:72%;
+}
+#collage-slider li
+{
+	display:inline;
+}
+.no-JS #collage-slider img
+{
+	width:30%;
+}
+.center
+{
+	text-align:center;
+}
+.nooo
+{
+	width:725px;
+	background:url('../Images/no.png');
+	display:block;
+	height:380px;
+	margin:auto;
+}
+/*.nooo:hover
+{
+	background:url('../Images/st-no.jpg');
+}*/
+/*html 5*/
+
+/*Fixed*/
+
+/*ClearFix*/
+.grupo:before,
+.grupo:after {
+    content:"";
+    display:table;
+}
+.grupo:after {
+    clear:both;
+}
+.grupo {
+    zoom:1; /* For IE 6/7 */
+}
+/*no JS*/
+.no-JS .show
+{
+	display:none;
+}
+.no-show
+{
+	display:none;
+}
+.no-JS .no-show
+{
+	display:block;
+}
+

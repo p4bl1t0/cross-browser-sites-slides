@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Sitios Compatibles entre Navegadores</title>
+		<link rel="stylesheet" type="text/css" href="Styles/colorbox.css" />
+		<link rel="stylesheet" type="text/css" href="Styles/anythingslider.css" />
+		<link rel="stylesheet" type="text/css" href="Styles/theme-metallic.css" />
+		<link rel="stylesheet" type="text/css" href="Styles/slidy.css" />
+		<!--[if lte IE 7]><link rel="stylesheet" href="Styles/anythingslider-ie.css" type="text/css" media="screen" /><![endif]-->
+		<meta name="description" content="Presentación de Diapositivas: Cross-Browser Sites para las Mini Charlas Tecnológicas" />
+		<meta name="keywords" content="HTML,CSS,JavaScript,Browsers" />
+		<meta name="author" content="Pablo Botta" />
+		<meta charset="UTF-8" />
+		<script src="Scripts/jquery-1.6.2.min.js" type="text/javascript"></script>
+		<script src="Scripts/jquery.colorbox-min.js" type="text/javascript"></script>
+		<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="Scripts/excanvas.min.js"></script><![endif]-->
+		<script type="text/javascript" src="Scripts/jquery.flot.min.js"></script>
+		<script  type="text/javascript" src="Scripts/jquery.flot.pie.min.js"></script>
+		<script  type="text/javascript" src="Scripts/jquery.anythingslider.min.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$('body').removeClass('no-JS').removeAttr('class');
+				//Examples of how to assign the ColorBox event to elements
+				$("a[rel='examplefb']").colorbox({width:"70%"});
+				$("a[rel='examplegplus']").colorbox({width:"70%"});
+				var data2001 = [
+					{ label: "Internet Explorer",  data: 91,color:'#3366cc'},
+					{ label: "Netscape",  data: 5,color:'#cc3300'},
+					{ label: "Otros",  data: 4,color:'#ff9900'}
+				];
+				var data2011 = [
+					{ label: "Internet Explorer ",  data: 44,color:'#3366cc'},
+					{ label: "Firefox",  data: 30,color:'#cc3300'},
+					{ label: "Chrome",  data: 19,color:'#009933'},
+					{ label: "Safari",  data: 5,color:'#990099'},
+					{ label: "Otros",  data: 2,color:'#ff9900'}
+				];
+				$.plot($("#grafico-dispersion"), data2001,
+				{
+						series: {
+							pie: {
+								show: true
+							}
+						}
+				});
+				$("#grafico-dispersion").click(function(){
+					if($(this).hasClass('g2001')){
+						$(this).removeClass('g2001');
+						$(".faded").fadeOut(100);
+						$("#titulo-grafico-dispersion").html('Dispersión del mercado mundial de navegadores (Año 2011)');
+						$.plot($("#grafico-dispersion"), data2011,
+						{
+								series: {
+									pie: {
+										show: true
+									}
+								}
+						});
+						$(".faded").fadeIn(500);
+					}
+					else{
+						$(this).addClass('g2001');
+						$(".faded").fadeOut(100);
+						$("#titulo-grafico-dispersion").html('Dispersión del mercado mundial de navegadores (Año 2001)');
+						$.plot($("#grafico-dispersion"), data2001,
+						{
+								series: {
+									pie: {
+										show: true
+									}
+								}
+						});
+						$(".faded").fadeIn(500);
+					}
+				});
+				$('#collage-slider').anythingSlider({theme: 'metallic',resizeContents: false, buildNavigation: false, width: 600,autoPlay: false,startStopped :true});
+				//$('#flex-container').flexslider({controlNav: false, pauseOnHover: true, keyboardNav: false   });
+				setTimeout("transiciones()", 1000);
+				$(document).keyup(function(e){
+					var code = e.which;
+					var location = 1;
+					if(window.location.hash || window.location.hash != undefined){
+						var hash = window.location.hash;
+						if(hash !== ''){
+							location = parseInt(hash.substring(2),10);
+						}
+						else{
+							location = 1;
+						}
+					}
+					else{
+						location = 1;
+					}
+					if(code === 37 || code === 38){
+						location = location - 1;
+					}
+					else{
+						if(code === 39 || code === 40){
+							location = location + 1;
+						}
+					}
+						
+					var goTo = '#a'+ location;
+					
+					$(goTo).parent().slideDown(1000);
+					var destination = $(goTo).offset().top;
+					$("html:not(:animated),body:not(:animated)").animate({ scrollTop: destination}, 1000 );
+					window.location.hash = '#'+ goTo.split('#')[1];
+					setTimeout("ocultar()", 1000);
+				});
+			});
+			function transiciones(){
+				//Transiciones entre diapositivas
+				$('.section').hide();
+				if(window.location.hash || window.location.hash != undefined){
+					var hash = window.location.hash;
+					if(hash !== ''){
+						$(hash).parent().show();
+					}
+					else{
+						$('.section:first').show();
+					}
+				}
+				else{
+					$('.section:first').show();
+				}
+				$('.nav a').click(function(event){
+					event.preventDefault();
+					var $this = $(this);
+					//$('.section').show();
+					var href = $this.attr('href');
+					$(href).parent().slideDown(1000);
+					var destination = $(href).offset().top;
+					$("html:not(:animated),body:not(:animated)").animate({ scrollTop: destination}, 1000 );
+					window.location.hash = '#'+ href.split('#')[1];
+					//$('.section').not($(href).parent()).hide();
+					setTimeout("ocultar()", 1000);
+				});
+				
+			}
+			function ocultar(){
+				if(window.location.hash || window.location.hash != undefined){
+					var hash = window.location.hash;
+					if(hash !== ''){
+						//$(hash).parent().show();
+						$('.section').not($(hash).parent()).hide();
+						//$(hash).parent().show();
+					}
+				}
+			}
+			
+		</script>
+	</head>
+    <body class="no-JS">
+		<div class="section">
+			<a name="a1" id="a1" class="mark-position"><a/>
+			<div class="header grupo">
+				<img src="Images/logo.png" class="logo" alt="Logo de las diapositivas" />
+				<h2>Sitios compatibles entre navegadores</h2>
+				<h3>Alcanzar el éxito sin morir en el intento</h3>
+			</div>
+			<div class="content">
+				<div class="content-inner">
+					<img src="Images/browser-wars.jpg" class="imagen-central" alt="Navegadores en pugna" />
+					<div class="presentation-introduction">
+						<h1>Sitios Compatibles entre navegadores</h1>
+						<p>Pablo Luis Botta</p>
+						<p>MCT - UTN FRRO</p>
+						<p>2011 - Rosario</p>
+					</div>
+				</div>
+			</div>
+			<ul class="nav">
+				<li><a href="#a1">Primera<a/></li>
+				<li><a href="#a1">Anterior<a/></li>
+				<li><a href="#a2">Siguiente<a/></li>
+				<li><a href="#a39">Última<a/></li>
+			</ul>
+		</div>
+		<div class="section">
+			<a name="a2" id="a2" class="mark-position"></a>
+			<div class="header grupo">
+				<img src="Images/logo.png" class="logo" alt="Logo de las diapositivas" />
+				<h2>Sitios compatibles entre navegadores</h2>
+				<h3>Que son los sitios compatibles entre navegadores?</h3>
+			</div>
+			<div class="content">
+				<div class="content-inner">
+					<p>Un sitio compatible entre navegadores es aquel que se <em>visualiza</em> y <em>funciona</em> de forma correcta en todos los navegadores presentes en el mercado.</p>
+					<p>Pero que vendría a ser esto?</p>
+					<ul>
+						<li><span><em>Visible:</em> Significa que el contenido pueda ser leído y comprendido  desde cualquier navegador. Esto sin embargo no implica que tenga que verse igual en todos ellos.</span></li>
+						<li><span><em>Funcional:</em> Significa que la funcionabilidad ofrecida está disponible en todos los navegadores. Esto sin embargo no implica que la interacción será la misma.</span></li>
+					</ul>
+					<p>Ejemplo de sitio compatible entre navegadores:</p>
+					<p><a href="Images/examples/fbie6.png" rel="examplefb" title="Vista de Facebook en otros navegadores">Facebook IE 6</a> - <a href="Images/examples/fbie7.png" rel="examplefb" title="Vista de Facebook en otros navegadores">Facebook IE 7</a></p>
+					<p>Ejemplo de sitios NO compatible entre navegadores:
+					<p><a href="Images/examples/gplusie6.png" rel="examplegplus" title="Vista de Facebook en otros navegadores">Google + IE 6</a> - <a href="Images/examples/gplusie7.png" rel="examplegplus" title="Vista de Facebook en otros navegadores">Google IE 7</a></p>
+				</div>
+			</div>
+			<ul class="nav">
+				<li><a href="#a1">Primera<a/></li>
+				<li><a href="#a1">Anterior<a/></li>
+				<li><a href="#a3">Siguiente<a/></li>
+				<li><a href="#a39">Última<a/></li>
+			</ul>
+		</div>
+		<div class="section">
+			<a name="a3" id="a3" class="mark-position"></a>
+			<div class="header grupo">
+				<img src="Images/logo.png" class="logo" alt="Logo de las diapositivas" />
+				<h2>Sitios compatibles entre navegadores</h2>
+				<h3>Dispersión del Mercado Mundial de navegadores</h3>
+			</div>
+			<div class="content">
+				<div class="content-inner">
+					<h4 id="titulo-grafico-dispersion" class="faded">Dispersión del mercado mundial de navegadores (Año 2001)</h4>
+					<div id="grafico-dispersion" class="g2001 faded show"></div>
+					<img src="Images/browser-market-share.png" alt="Browser Market Share" class="grafico-dispersion no-show" />
+				</div>
+			</div>
+			<ul class="nav">
+				<li><a href="#a1">Primera<a/></li>
+				<li><a href="#a2">Anterior<a/></li>
+				<li><a href="#a4">Siguiente<a/></li>
+				<li><a href="#a39">Última<a/></li>
+			</ul>
+		</div>
+		<div class="section">
+			<a name="a4" id="a4" class="mark-position"></a>
+			<div class="header grupo">
+				<img src="Images/logo.png" class="logo" alt="Logo de las diapositivas" />
+				<h2>Sitios compatibles entre navegadores</h2>
+				<h3>Por que la batalla entre los navegadores? Que implicancias tiene?</h3>
+			</div>
+			<div class="content">
+				<div class="content-inner">
+					<p>¿Por qué?</p>
+					<ul>
+						<li><span><em>Definición de estánderes: </em>Implementación de tecnologías que se vuelven estandar.</span></li>
+						<li><span><em>Implementación de estándares:</em> Definir como se implementan.</span></li>
+						<li><span><em>Codecs:</em> Ventaja competitiva y patentes.</span></li>
+						<li><span><em>Promoción de propios productos online (Google y Microsoft):</em> Ejemplo: Google Docs, Office 365</span></li>
+						<li><span><em>Estadísticas de uso:</em> Como se utiliza el navegador</span></li>
+					</ul>
+				</div>
+			</div>
+			<ul class="nav">
+				<li><a href="#a1">Primera<a/></li>
+				<li><a href="#a3">Anterior<a/></li>
+				<li><a href="#a5">Siguiente<a/></li>
+				<li><a href="#a39">Última<a/></li>
+			</ul>
+		</div>
+		<div class="section">
+			<a name="a5" id="a5" class="mark-position"></a>
+			<div class="header grupo">
+				<img src="Images/logo.png" class="logo" alt="Logo de las diapositivas" />
+				<h2>Sitios compatibles entre navegadores</h2>
+				<h3>Conocer y entender nuestra audiencia</h3>
+			</div>
+			<div class="content">
+				<div class="content-inner">
+					<div id="flex-container">
+						<ul id="collage-slider" class="slides">
+							<li><img src="Images/InternetUsers/ejecutivos.jpg" alt="Ejecutivos y oficinistas" /></li>
+							<li><img src="Images/InternetUsers/maqueros.jpg" alt="Usuarios"/></li>
+							<li><img src="Images/InternetUsers/geeks.jpg" alt="Geeks"/></li>
+							<li><img src="Images/InternetUsers/bebes.jpg" alt="Bebes"/></li>
+							<li><img src="Images/InternetUsers/abuela-facebook.png" alt="Hasta las abuelas usan facebook" /></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<ul class="nav">
+				<li><a href="#a1">Primera<a/></li>
+				<li><a href="#a4">Anterior<a/></li>
+				<li><a href="#a6">Siguiente<a/></li>
+				<li><a href="#a39">Última<a/></li>
+			</ul>
+		</div>
+		<div class="section">
+			<a name="a6" id="a6" class="mark-position"></a>
+			<div class="header grupo">
+				<img src="Images/logo.png" class="logo" alt="Logo de las diapositivas" />
+				<h2>Sitios compatibles entre navegadores</h2>
+				<h3>Estrategias para lograr la compatibilidad</h3>
+			</div>
+			<div class="content">
+				<div class="content-inner">
+					<p>Desde la exploción de la web, diseñadores y desarrolladores han buscado la forma de alcanzar que sus sitios sean compatibles entre navegadores.</p>
+					<ul>
+						<li><span><em>Varias versiones:</em>El mismo "look" en todos los navegadores.</span></li>
+						<li><span><em>Graceful Degradation o "Degradación elegante":</em> Sitio tolerante a fallas la visualización se va degradando cuanto peor es el navegador.</span></li>
+						<li><span><em>Progressive Enhancement o "Mejora Progresiva":</em> Construido en capas que se van añadiendo cuanto mejor es el soporte</span></li>
+					</ul>
+				</div>
+			</div>
+			<ul class="nav">
+				<li><a href="#a1">Primera<a/></li>
+				<li><a href="#a5">Anterior<a/></li>
+				<li><a href="#a7">Siguiente<a/></li>
+				<li><a href="#a39">Última<a/></li>
+			</ul>
+		</div>
+		<div class="section">
+			<a name="a7" id="a7" class="mark-position"><a/>
+			<div class="header grupo">
+				<img src="Images/logo.png" class="logo" alt="Logo de las diapositivas" />
+				<h2>Sitios compatibles entre navegadores</h2>
+				<h3>Varias versiones</h3>
+			</div>
+			<div class="content">
+				<div class="content-inner">
+					<div class="vertice">
+						<h2>Varias versiones - Inconvenientes:</h2>
+						<p>Escalabilidad y mantenimiento.</p>
+						<div class="center">
+							<img src="Images/silos.jpg" alt="Problemas de escalabilidad" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<ul class="nav">
+				<li><a href="#a1">Primera<a/></li>
+				<li><a href="#a6">Anterior<a/></li>
+				<li><a href="#a8">Siguiente<a/></li>
+				<li><a href="#a39">Última<a/></li>
+			</ul>
+		</div>
+		<div class="section">
+			<a name="a8" id="a8" class="mark-position"><a/>
+			<div class="header grupo">
+				<img src="Images/logo.png" class="logo" alt="Logo de las diapositivas" />
+				<h2>Sitios compatibles entre navegadores</h2>
+				<h3>Degradación elegante</h3>
+			</div>
+			<div class="content">
+				<div class="content-inner">
+					<div class="vertice">
+						<h2>Degradación elegante:</h2>
+						<p>En muchos sistemas e incluso en la web se ha usado este pricipio de diseño.</p>
+						<h3>La tolerancia a los fallos.</h3>
+					</div>
+				</div>
+			</div>
+			<ul class="nav">
+				<li><a href="#a1">Primera<a/></li>
+				<li><a href="#a7">Anterior<a/></li>
+				<li><a href="#a9">Siguiente<a/></li>
+				<li><a href="#a39">Última<a/></li>
+			</ul>
+		</div>
+		<div class="section">
+			<a name="a9" id="a9" class="mark-position"><a/>
+			<div class="header grupo">
+				<img src="Images/logo.png" class="logo" alt="Logo de las diapositivas" />
+				<h2>Sitios compatibles entre navegadores</h2>
+				<h3>Degradación elegante y varias versiones.</h3>
+			</div>
+			<div class="content">
+				<div class="content-inner">
+					<div class="vertice">
+						<h2>Proponen un pensamiento hacia el pasado para solucionar problemas existentes y actuales, pero ...</h2>
+						<h1>... se olvidan del FUTURO</h1>
+						<h2>La WEB es algo cambiante que está creciendo y seguirá haciendolo. Debemos evitar diseñar sitios pensando en el presente y en los problemas pasados y comenzar a pensarlo adaptables.</h2>
+					</div>
+				</div>
+			</div>
+			<ul class="nav">
+				<li><a href="#a1">Primera<a/></li>
+				<li><a href="#a8">Anterior<a/></li>
+				<li><a href="#a10">Siguiente<a/></li>
+				<li><a href="#a39">Última<a/></li>
+			</ul>
+		</div>
+		<div class="section">
+			<a name="a10" id="a10" class="mark-position"><a/>
+			<div class="header grupo">
+				<img src="Images/logo.png" class="logo" alt="Logo de las diapositivas" />
+				<h2>Sitios compatibles entre navegadores</h2>
+				<h3>Degradación elegante y varias versiones.</h3>
+			</div>
+			<div class="content">
+				<div class="content-inner">
+					<div class="vertice">
+						<h1>¿Tienen los sitios que verse igual en todos los navegadores?</h1>
+						<div class="center">
+							<div class="nooo"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<ul class="nav">
+				<li><a href="#a1">Primera<a/></li>
+				<li><a href="#a9">Anterior<a/></li>
+				<li><a href="#a11">Siguiente<a/></li>
+				<li><a href="#a39">Última<a/></li>
+			</ul>
+		</div>
+		<div class="section">
+			<a name="a11" id="a11" class="mark-position"><a/>
+			<div class="header grupo">
+				<img src="Images/logo.png" class="logo" alt="Logo de las diapositivas" />
+				<h2>Sitios compatibles entre navegadores</h2>
+				<h3>Degradación elegante y varias versiones.</h3>
+			</div>
+			<div class="content">
+				<div class="content-inner">
+					<div class="vertice">
+						<h2>Así se ven los sitios que desarrollamos hace unos años atrás en la web de hoy. En aquél momento se veían bien en todos los navegadores y en todas las resoluciones.</h2>
+						<a href="Cadera/index.html" target="_blank">Sitio desarrollado bajo el principio de degradación elegante.<a/>
+					</div>
+				</div>
+			</div>
+			<ul class="nav">
+				<li><a href="#a1">Primera<a/></li>
+				<li><a href="#a10">Anterior<a/></li>
+				<li><a href="#a12">Siguiente<a/></li>
+				<li><a href="#a39">Última<a/></li>
+			</ul>
+		</div>
+		<div class="section">
+			<a name="a12"  id="a12" class="mark-position"><a/>
+			<div class="header grupo">
+				<img src="Images/logo.png" class="logo" alt="Logo de las diapositivas" />
+				<h2>Sitios compatibles entre navegadores</h2>
+				<h3>Degradación elegante y varias versiones.</h3>
+			</div>
+			<div class="content">
+				<div class="content-inner">
+					<div class="vertice">
+						<h2>Así se ven los sitios que desarrollamos hace unos años atrás en la web de hoy.</h2>
+						<div class="center">
+							<img src="Images/cadera-phone.png" alt="No" />
+							<img src="Images/cadera-phone-2.PNG" alt="No" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<ul class="nav">
+				<li><a href="#a1">Primera<a/></li>
+				<li><a href="#a11">Anterior<a/></li>
+				<li><a href="#a13">Siguiente<a/></li>
+				<li><a href="#a39">Última<a/></li>
+			</ul>
+		</div>
+		<div class="section">
+			<a name="a13" id="a13" class="mark-position"><a/>
+			<div class="header grupo">
+				<img src="Images/logo.png" class="logo" alt="Logo de las diapositivas" />
+				<h2>Sitios compatibles entre navegadores</h2>
+				<h3>Degradación elegante y varias versiones.</h3>
+			</div>
+			<div class="content">
+				<div class="content-inner">
+					<div class="vertice">
+						<h2>Así se ven los sitios que desarrollamos hace unos años atrás en la web de hoy.</h2>
+						<div class="center">
+							<img src="Images/cadera-tv.jpg" alt="No" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<ul class="nav">
+				<li><a href="#a1">Primera<a/></li>
+				<li><a href="#a12">Anterior<a/></li>
+				<li><a href="#a14">Siguiente<a/></li>
+				<li><a href="#a39">Última<a/></li>
+			</ul>
+		</div>
+		<div class="section">
+			<a name="a14" id="a14" class="mark-position"><a/>
+			<div class="header grupo">
+				<img src="Images/logo.png" class="logo" alt="Logo de las diapositivas" />
+				<h2>Sitios compatibles entre navegadores</h2>
+				<h3>Mejora progresiva.</h3>
+			</div>
+			<div class="content">
+				<div class="content-inner">
+					<div class="vertice">
+						<div class="center">
+							<h1>ALTO! Tenemos que pensar distinto. Tenemos que pensar al reves.</h1>
+							<img src="Images/alreves.jpg" alt="No" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<ul class="nav">
+				<li><a href="#a1">Primera<a/></li>
+				<li><a href="#a13">Anterior<a/></li>
+				<li><a href="#a15">Siguiente<a/></li>
+				<li><a href="#a39">Última<a/></li>
+			</ul>
+		</div>
+		<div class="section">
+			<a name="a15" id="a15" class="mark-position"><a/>
+			<div class="header grupo">
+				<img src="Images/logo.png" class="logo" alt="Logo de las diapositivas" />
+				<h2>Sitios compatibles entre navegadores</h2>
+				<h3>Mejora progresiva.</h3>
+			</div>
+			<div class="content">
+				<div class="content-inner">
+					<div class="vertice">
+						<div class="center">
+							<h1>PENSAR HACIA EL FUTURO.</h1>
+							<img src="Images/futuro.jpg" alt="No" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<ul class="nav">
+				<li><a href="#a1">Primera<a/></li>
+				<li><a href="#a14">Anterior<a/></li>
+				<li><a href="#a16">Siguiente<a/></li>
+				<li><a href="#a39">Última<a/></li>
+			</ul>
+		</div>
+		<div class="section">
+			<a name="a16" id="a16" class="mark-position"><a/>
+			<div class="header grupo">
+				<img src="Images/logo.png" class="logo" alt="Logo de las diapositivas" />
+				<h2>Sitios compatibles entre navegadores</h2>
+				<h3>Mejora progresiva.</h3>
+			</div>
+			<div class="content">
+				<div class="content-inner">
+					<div class="vertice">
+						<div class="center">
+							<h1>Hacia sitios adaptables, accesibles y inostrusivos.</h1>
+							<img src="Images/site-tv.jpg" alt="No" />
+							<img src="Images/ejemplo-phone.png" alt="No" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<ul class="nav">
+				<li><a href="#a1">Primera<a/></li>
+				<li><a href="#a15">Anterior<a/></li>
+				<li><a href="#a17">Siguiente<a/></li>
+				<li><a href="#a39">Última<a/></li>
+			</ul>
+		</div>
+		<div class="section">
+			<a name="a17" id="a17" class="mark-position"><a/>
+			<div class="header grupo">
+				<img src="Images/logo.png" class="logo" alt="Logo de las diapositivas" />
+				<h2>Sitios compatibles entre navegadores</h2>
+				<h3>Mejora progresiva. ¿Por qué?</h3>
+			</div>
+			<div class="content">
+				<div class="content-inner">
+					<div class="vertice">
+						<div class="center">
+							<h3>Los navegadores están evolucionando mucho más rápido . . . versiones nuevas con nuevas carácteristicas cada 6 semanas.</h3>
+							<img src="Images/evolucion.jpg" style="height:450px;" alt="No" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<ul class="nav">
+				<li><a href="#a1">Primera<a/></li>
+				<li><a href="#a16">Anterior<a/></li>
+				<li><a href="#a18">Siguiente<a/></li>
+				<li><a href="#a39">Última<a/></li>
+			</ul>
+		</div>
+		<div class="section">
+			<a name="a18" id="a18" class="mark-position"><a/>
+			<div class="header grupo">
+				<img src="Images/logo.png" class="logo" alt="Logo de las diapositivas" />
+				<h2>Sitios compatibles entre navegadores</h2>
+				<h3>Mejora progresiva. ¿Por qué?</h3>
+			</div>
+			<div class="content">
+				<div class="content-inner">
+					<div class="vertice">
+						<div>
+							<h3>Los Web está cambiando ...</h3>
+							<h3>Nuevas tecnologías y nuevos estándares están surgiendo.</h3>
+							<h1 class="center">HTML 5, CSS 3, WebGL, Geolocalization, etc . . .</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+			<ul class="nav">
+				<li><a href="#a1">Primera<a/></li>
+				<li><a href="#a17">Anterior<a/></li>
+				<li><a href="#a19">Siguiente<a/></li>
+				<li><a href="#a39">Última<a/></li>
+			</ul>
+		</div>
+		<div class="section">
+			<a name="a19" id="a19" class="mark-position"><a/>
+			<div class="header grupo">
+				<img src="Images/logo.png" class="logo" alt="Logo de las diapositivas" />
+				<h2>Sitios compatibles entre navegadores</h2>
+				<h3>Mejora progresiva. ¿Por qué?</h3>
+			</div>
+			<div class="content">
+				<div class="content-inner">
+					<div class="vertice">
+						<div class="center">
+							<h2>No sabemos en el futuro con que dispositvos se va interactuar con la web.</h2>
+							<img src="Images/electrodomesticos.jpg" alt="No" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<ul class="nav">
+				<li><a href="#a1">Primera<a/></li>
+				<li><a href="#a18">Anterior<a/></li>
+				<li><a href="#a20">Siguiente<a/></li>
+				<li><a href="#a39">Última<a/></li>
+			</ul>
+		</div>
+		<div class="section">
+			<a name="a20" id="a20" class="mark-position"><a/>
+			<div class="header grupo">
+				<img src="Images/logo.png" class="logo" alt="Logo de las diapositivas" />
+				<h2>Sitios compatibles entre navegadores</h2>
+				<h3>Mejora progresiva. Como aplicarla.</h3>
+			</div>
+			<div class="content">
+				<div class="content-inner">
+					<div class="vertice">
+						<div class="center">
+							<h2>Todo muy lindo! Pero como hago para desarrollar utilizando mejora progresiva?</h2>
+							<img src="Images/chew.jpg" alt="No" />
+						</div>
+					</div>
+				</div>
+			</div>
+			<ul class="nav">
+				<li><a href="#a1">Primera<a/></li>
+				<li><a href="#a19">Anterior<a/></li>
+				<li><a href="#a21">Siguiente<a/></li>
+				<li><a href="#a39">Última<a/></li>
+			</ul>
+		</div>
+		<div class="section">
+			<a name="a21" id="a21" class="mark-position"><a/>
+			<div class="header grupo">
+				<img src="Images/logo.png" class="logo" alt="Logo de las diapositivas" />
+				<h2>Sitios compatibles entre navegadores</h2>
+				<h3>Mejora progresiva.</h3>
+			</div>
+			<div class="content">
+				<div class="content-inner">
+					<div class="vertice">
+						<div class="center">
+							<br />
+							<br />
+							<br />
+							<br />
+							<br />
+							<br />
+							<h1>HTML</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+			<ul class="nav">
+				<li><a href="#a1">Primera<a/></li>
+				<li><a href="#a20">Anterior<a/></li>
+				<li><a href="#a22">Siguiente<a/></li>
+				<li><a href="#a39">Última<a/></li>
+			</ul>
+		</div>
+		<div class="section">
+			<a name="a22" id="a22" class="mark-position"><a/>
+			<div class="header grupo">
+				<img src="Images/logo.png" class="logo" alt="Logo de las diapositivas" />
+				<h2>Sitios compatibles entre navegadores</h2>
+				<h3>Mejora progresiva.</h3>
+			</div>
+			<div class="content">
+				<div class="content-inner">
+					<div class="vertice">
+						<div class="center">
+							<h1>Igual punto de partida.</h1>
+						</div>
+						<ul>
+							<li><span><em>Validación del marcado HTML:</em> Obtener un marcado libre de errores y evitar que los navegadores entren en "quirskmode" o modo de correción de errores.</span></li>
+							<li><span><em>HTML semántico:</em> Mejora el SEO y permite que los navegadores provean una mejor experiencia de usuario.</span></li>
+							<li><span><em>Utilizar sintaxis estricta:</em> Elimina potenciales errores al programar.</span></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<ul class="nav">
+				<li><a href="#a1">Primera<a/></li>
+				<li><a href="#a21">Anterior<a/></li>
+				<li><a href="#a23">Siguiente<a/></li>
+				<li><a href="#a39">Última<a/></li>
+			</ul>
+		</div>
+		<div class="section">
+			<a name="a23" id="a23" class="mark-position"><a/>
+			<div class="header grupo">
+				<img src="Images/l
+				ogo.png" class="logo" alt="Logo de las diapositivas" />
+				<h2>Sitios compatibles entre navegadores</h2>
+				<h3>Mejora progresiva.</h3>
+			</div>
+			<div class="content">
+				<div class="content-inner">
+					<div class="vertice">
+						<div class="center">
+							<h1>El contenido es el rey.</h1>
+						</div>
+						<ul>
+							<li><span><em>Escribir el marcado de acuerdo al contenido y no de acuerdo al estilo a aplicar.</em></span></li>
+							<li><span><em>Reducir y minimizar al mínimo el número de etiquetas.</em></span></li>
+							<li><span><em>No utilizar etiquetas para dar estilo únicamente.</em></span></li>
+							<li><span><em>Agregar elementos extras para estilar mediante Javascript o CSS.</em></span></li>
+						</ul>
+						
+						
+					</div>
+				</div>
+			</div>
+			<ul class="nav">
+				<li><a href="#a1">Primera<a/></li>
+				<li><a href="#a22">Anterior<a/></li>
+				<li><a href="#a24">Siguiente<a/></li>
+				<li><a href="#a39">Última<a/></li>
+			</ul>
+		</div>
+		<div class="section">
+			<a name="a24" id="a24" class="mark-position"><a/>
+			<div class="header grupo">
+				<img src="Images/logo.png" class="logo" alt="Logo de las diapositivas" />
+				<h2>Sitios compatibles entre navegadores</h2>
+				<h3>Mejora progresiva.</h3>
+			</div>
+			<div class="content">
+				<div class="content-inner">
+					<div class="vertice">
+						<div class="center">
+							<h1>HTML 5</h1>
+						</div>
+						<ul>
+							<li><span><em>Contenido multimedia</em> Canvas, Audio, Video</span></li>
+							<li><span><em>Mejoras en los formularios:</em> required, pattern, placeholder, etc.</span></li>
+							<li><span><em>Etiquetas semánticas:</em> Section, Article, Header, Footer, Aside, Figure</span></li>
+							<li><span><em>Otras tecnologías:</em> Geolocalizacion, Local Storage, Web Workers, etc.</span></li>
+						</ul>
+						<p>Se pueden utilzar hoy?</p>
+						<ul>
+							<li><span><em>Polyfills</em></span></li>
+							<li><span><em>Otras alternativas</em> flash o java.</span></li>
+							<li><span><em>No todas tienen una alternativa</em></span></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<ul class="nav">
+				<li><a href="#a1">Primera<a/></li>
+				<li><a href="#a23">Anterior<a/></li>
+				<li><a href="#a25">Siguiente<a/></li>
+				<li><a href="#a39">Última<a/></li>
+			</ul>
+		</div>
+		<div class="section">
+			<a name="a25" id="a25" class="mark-position"><a/>
+			<div class="header grupo">
+				<img src="Images/logo.png" class="logo" alt="Logo de las diapositivas" />
+				<h2>Sitios compatibles entre navegadores</h2>
+				<h3>Mejora progresiva.</h3>
+			</div>
+			<div class="content">
+				<div class="content-inner">
+					<div class="vertice">
+						<div class="center">
+							<br />
+							<br />
+							<br />
+							<br />
+							<br />
+							<br />
+							<h1>CSS</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+			<ul class="nav">
+				<li><a href="#a1">Primera<a/></li>
+				<li><a href="#a24">Anterior<a/></li>
+				<li><a href="#a26">Siguiente<a/></li>
+				<li><a href="#a39">Última<a/></li>
+			</ul>
+		</div>
+		<div class="section">
+			<a name="a26" id="a26" class="mark-position"><a/>
+			<div class="header grupo">
+				<img src="Images/logo.png" class="logo" alt="Logo de las diapositivas" />
+				<h2>Sitios compatibles entre navegadores</h2>
+				<h3>Mejora progresiva.</h3>
+			</div>
+			<div class="content">
+				<div class="content-inner">
+					<div class="vertice">
+						<div class="center">
+							<h1>Igual punto de partida.</h1>
+						</div>
+						<ul>
+							<li><span><em>Resetear o Normalizar:</em> Reducir las diferencias existente entre los navegadores al estilar.</span></li>
+							<li><span><em>Reglas que funcionan:</em> Hay estilos que sabemos son puramente compatible entre navegadores, utilizar estos para evitar problemas y aplicar parches.</span></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<ul class="nav">
+				<li><a href="#a1">Primera<a/></li>
+				<li><a href="#a25">Anterior<a/></li>
+				<li><a href="#a27">Siguiente<a/></li>
+				<li><a href="#a39">Última<a/></li>
+			</ul>
+		</div>
+		<div class="section">
+			<a name="a27" id="a27" class="mark-position"><a/>
+			<div class="header grupo">
+				<img src="Images/logo.png" class="logo" alt="Logo de las diapositivas" />
+				<h2>Sitios compatibles entre navegadores</h2>
+				<h3>Mejora progresiva.</h3>
+			</div>
+			<div class="content">
+				<div class="content-inner">
+					<div class="vertice">
+						<div class="center">
+							<h1>CSS 3</h1>
+						</div>
+						<ul>
+							<li><span><em>Bordes redondeados</em></span></li>
+							<li><span><em>Sombras</em></span></li>
+							<li><span><em>Rotaciones y transiciones</em></span></li>
+							<li><span><em>Más y nuevas fuentes</em></span></li>
+							<li><span><em>Mejoras en los fondos y mejoras en los colores</em></span></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<ul class="nav">
+				<li><a href="#a1">Primera<a/></li>
+				<li><a href="#a26">Anterior<a/></li>
+				<li><a href="#a28">Siguiente<a/></li>
+				<li><a href="#a39">Última<a/></li>
+			</ul>
+		</div>
+		<div class="section">
+			<a name="a28" id="a28" class="mark-position"><a/>
+			<div class="header grupo">
+				<img src="Images/logo.png" class="logo" alt="Logo de las diapositivas" />
+				<h2>Sitios compatibles entre navegadores</h2>
+				<h3>Mejora progresiva.</h3>
+			</div>
+			<div class="content">
+				<div class="content-inner">
+					<div class="vertice">
+						<div class="center">
+							<h1>¿Se puede aplicar hoy?</h1>
+						</div>
+						<h2>Si! Recordemos como funciona las reglas de CSS. En cascada y tolerante a fallos.</h2>
+						<img src="images/reglacss.gif" alt="reglas css" />
+						<p>Si alguna propiedad falla el selector se sigue aplicando, si algún selector de la lista de selectores falla no se aplica la regla.</p>
+					</div>
+				</div>
+			</div>
+			<ul class="nav">
+				<li><a href="#a1">Primera<a/></li>
+				<li><a href="#a27">Anterior<a/></li>
+				<li><a href="#a29">Siguiente<a/></li>
+				<li><a href="#a39">Última<a/></li>
+			</ul>
+		</div>
+		<div class="section">
+			<a name="a29" id="a29" class="mark-position"><a/>
+			<div class="header grupo">
+				<img src="Images/logo.png" class="logo" alt="Logo de las diapositivas" />
+				<h2>Sitios compatibles entre navegadores</h2>
+				<h3>Mejora progresiva.</h3>
+			</div>
+			<div class="content">
+				<div class="content-inner">
+					<div class="vertice">
+						<h2>Entonces podríamos aplicar CSS progresivamente de la siguiente forma</h2>
+<pre>/*RECORDAR LA CASCADA*/
+.work-slider-container {
+	background:#334B01;
+	background-image: url('images/gradient.png') repeat-y top left;
+	background-image: linear-gradient(top, #334B01, #B4DC00);
+}
+
+.works img
+{
+	border: solid #FFFFFF; /*BLANCO*/
+	border: solid rgba(255, 255, 255, .4); /*BLANCO TRANSPARENTADO*/
+	border-width:9px 0;
+}
+
+/*OJO CON ESTO*/
+p.language, p[lang] {
+	color:red;
+}
+/*ALGUNOS NABEGADORES NO VAN A APLICARLA*/
+</pre>
+					</div>
+				</div>
+			</div>
+			<ul class="nav">
+				<li><a href="#a1">Primera<a/></li>
+				<li><a href="#a28">Anterior<a/></li>
+				<li><a href="#a30">Siguiente<a/></li>
+				<li><a href="#a39">Última<a/></li>
+			</ul>
+		</div>
+		<div class="section">
+			<a name="a30" id="a30" class="mark-position"><a/>
+			<div class="header grupo">
+				<img src="Images/logo.png" class="logo" alt="Logo de las diapositivas" />
+				<h2>Sitios compatibles entre navegadores</h2>
+				<h3>Mejora progresiva.</h3>
+			</div>
+			<div class="content">
+				<div class="content-inner">
+					<div class="vertice">
+						<div class="center">
+							<h1>Medias Query</h1>
+						</div>
+						<dt>Media Query definida por la W3C</dt>
+						<dd>A media query consists of a media type and zero or more expressions that check for the conditions of particular media features.</dd>
+						<p>Las caracteristicas que se pueden detectar son: width, height, device-width, device-height, orientation, aspect-ratio, device-aspect-ratio, color, color-index, monochrome, resolution, scan, grid </p>
+						<p>El primer filtro es si el navegador la soporta o no la soporta (El mismo orden que las reglas).</p>
+<pre>@media screen and (min-width: 1270px) {
+	.inner
+	{
+		width:80%;
+		margin:auto;
+	}
+}
+@media screen and (orientation: landscape) {
+	.inner
+	{
+		width:50%;
+		margin:auto;
+	}
+}
+</pre>
+					</div>
+				</div>
+			</div>
+			<ul class="nav">
+				<li><a href="#a1">Primera<a/></li>
+				<li><a href="#a29">Anterior<a/></li>
+				<li><a href="#a31">Siguiente<a/></li>
+				<li><a href="#a39">Última<a/></li>
+			</ul>
+		</div>
+		<div class="section">
+			<a name="a31" id="a31" class="mark-position"><a/>
+			<div class="header grupo">
+				<img src="Images/logo.png" class="logo" alt="Logo de las diapositivas" />
+				<h2>Sitios compatibles entre navegadores</h2>
+				<h3>Mejora progresiva.</h3>
+			</div>
+			<div class="content">
+				<div class="content-inner">
+					<div class="vertice">
+						<div class="center">
+							<h2>Detección de Funcionalidades: Modernizr</h2>
+						</div>
+						<dt>Modernizr</dt>
+						<dd>Modernizr is a small JavaScript library that detects the availability of native implementations for next-generation web technologies, i.e. features that stem from the HTML5 and CSS3 specifications. Many of these features are already implemented in at least one major browser (most of them in two or more), and what Modernizr does is, very simply, tell you whether the current browser has this feature natively implemented or not.</dd>
+<p>Uso en CSS:</p>
+<pre>.fontface .header h1, .fontface header h1{
+	font-family: 'Yellowtail', cursive;
+}
+.no-cssgradients .work-slider-container {
+	background-image: url('images/gradient.png') repeat-y top left;
+}
+.cssgradients .work-slider-container {
+	background-image: linear-gradient(top, #334B01, #B4DC00);
+}
+</pre>
+<p>Uso en Javascript:</p>
+<pre>if (Modernizr.touch){
+   // bind to touchstart, touchmove, etc and watch `event.streamId`
+} else {
+   // bind to normal click, mousemove, etc
+}
+</pre>
+					</div>
+				</div>
+			</div>
+			<ul class="nav">
+				<li><a href="#a1">Primera<a/></li>
+				<li><a href="#a30">Anterior<a/></li>
+				<li><a href="#a32">Siguiente<a/></li>
+				<li><a href="#a39">Última<a/></li>
+			</ul>
+		</div>
+		<div class="section">
+			<a name="a32" id="a32" class="mark-position"><a/>
+			<div class="header grupo">
+				<img src="Images/logo.png" class="logo" alt="Logo de las diapositivas" />
+				<h2>Sitios compatibles entre navegadores</h2>
+				<h3>Mejora progresiva.</h3>
+			</div>
+			<div class="content">
+				<div class="content-inner">
+					<div class="vertice">
+						<div class="center">
+							<br />
+							<br />
+							<br />
+							<br />
+							<br />
+							<br />
+							<h1>Javascript</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+			<ul class="nav">
+				<li><a href="#a1">Primera<a/></li>
+				<li><a href="#a31">Anterior<a/></li>
+				<li><a href="#a33">Siguiente<a/></li>
+				<li><a href="#a39">Última<a/></li>
+			</ul>
+		</div>
+		<div class="section">
+			<a name="a33" id="a33" class="mark-position"><a/>
+			<div class="header grupo">
+				<img src="Images/logo.png" class="logo" alt="Logo de las diapositivas" />
+				<h2>Sitios compatibles entre navegadores</h2>
+				<h3>Mejora progresiva.</h3>
+			</div>
+			<div class="content">
+				<div class="content-inner">
+					<div class="vertice">
+						<div class="center">
+							<h1>Igual punto de partida.</h1>
+						</div>
+						<h2>Entre cada uno de los distintos navegadores existen distintos tipos de implementaciones del estandar ECMAscript (en la jerga Javascript). Estas diferencias hacen que sea complicado la codificación e incluso el testeo.</h2>
+						<h2>Un buen punto de partido es trabajar sobre algunos de los frameworks de Javascript que nos ahorran los problemas de las distintas implementaciones.</h2>
+						<h3>Frameworks:</h3>
+						<ul>
+							<li><em>Jquery</em></li>
+							<li><em>Mootools</em></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<ul class="nav">
+				<li><a href="#a1">Primera<a/></li>
+				<li><a href="#a32">Anterior<a/></li>
+				<li><a href="#a34">Siguiente<a/></li>
+				<li><a href="#a39">Última<a/></li>
+			</ul>
+		</div>
+		<div class="section">
+			<a name="a34" id="a34" class="mark-position"><a/>
+			<div class="header grupo">
+				<img src="Images/logo.png" class="logo" alt="Logo de las diapositivas" />
+				<h2>Sitios compatibles entre navegadores</h2>
+				<h3>Mejora progresiva.</h3>
+			</div>
+			<div class="content">
+				<div class="content-inner">
+					<div class="vertice">
+						<h1>Ser inostrusivo</h1>
+						<h2>La ausencia de Javascript no debe convertir nuestro sitio en inútil.</h2>
+<pre>if (jQuery) {  	
+	$(document).ready(function(){
+		$('.flexslider').flexslider({controlNav: false, pauseOnHover: true   });
+		$('.scrollPage').click(function() {
+			var elementClicked = $(this).attr("href");
+			var destination = $(elementClicked).offset().top;
+			$("html:not(:animated),body:not(:animated)").animate({ scrollTop: destination-50}, 500 );
+			window.location.hash = '#'+ elementClicked.split('#')[1];
+			return false;
+		});
+		
+		$('a[rel=external]').click(function (event){
+			event.preventDefault();
+			window.open($(this).attr('href'));
+		});
+	});
+}
+</pre>
+					</div>
+				</div>
+			</div>
+			<ul class="nav">
+				<li><a href="#a1">Primera<a/></li>
+				<li><a href="#a33">Anterior<a/></li>
+				<li><a href="#a35">Siguiente<a/></li>
+				<li><a href="#a39">Última<a/></li>
+			</ul>
+		</div>
+		<div class="section">
+			<a name="a35" id="a35" class="mark-position"><a/>
+			<div class="header grupo">
+				<img src="Images/logo.png" class="logo" alt="Logo de las diapositivas" />
+				<h2>Sitios compatibles entre navegadores</h2>
+				<h3>Mejora progresiva.</h3>
+			</div>
+			<div class="content">
+				<div class="content-inner">
+					<div class="vertice">
+						<div class="center">
+							<br />
+							<br />
+							<br />
+							<br />
+							<br />
+							<br />
+							<h1>Últimas Consideraciones</h1>
+						</div>
+					</div>
+				</div>
+			</div>
+			<ul class="nav">
+				<li><a href="#a1">Primera<a/></li>
+				<li><a href="#a32">Anterior<a/></li>
+				<li><a href="#a36">Siguiente<a/></li>
+				<li><a href="#a39">Última<a/></li>
+			</ul>
+		</div>
+		<div class="section">
+			<a name="a36" id="a36" class="mark-position"><a/>
+			<div class="header grupo">
+				<img src="Images/logo.png" class="logo" alt="Logo de las diapositivas" />
+				<h2>Sitios compatibles entre navegadores</h2>
+				<h3>Mejora progresiva.</h3>
+			</div>
+			<div class="content">
+				<div class="content-inner">
+					<div class="vertice">
+						<h2>Navegadores compatibles</h2>
+						<ul>
+							<li><em>Firefox 3.6 +</em></li>
+							<li><em>Internet Explorer 9 +</em></li>
+							<li><em>Chrome 1 +</em></li>
+							<li><em>Opera 9.5 +</em></li>
+							<li><em>Safari 3 +</em></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<ul class="nav">
+				<li><a href="#a1">Primera<a/></li>
+				<li><a href="#a33">Anterior<a/></li>
+				<li><a href="#a37">Siguiente<a/></li>
+				<li><a href="#a39">Última<a/></li>
+			</ul>
+		</div>
+		<div class="section">
+			<a name="a37" id="a37" class="mark-position"><a/>
+			<div class="header grupo">
+				<img src="Images/logo.png" class="logo" alt="Logo de las diapositivas" />
+				<h2>Sitios compatibles entre navegadores</h2>
+				<h3>Mejora progresiva.</h3>
+			</div>
+			<div class="content">
+				<div class="content-inner">
+					<div class="vertice">
+						<h2>Navegadores a FIXEAR</h2>
+						<ul>
+							<li><em>Internet Explorer 8 -</em></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<ul class="nav">
+				<li><a href="#a1">Primera<a/></li>
+				<li><a href="#a34">Anterior<a/></li>
+				<li><a href="#a38">Siguiente<a/></li>
+				<li><a href="#a39">Última<a/></li>
+			</ul>
+		</div>
+		<div class="section">
+			<a name="a38" id="a38" class="mark-position"><a/>
+			<div class="header grupo">
+				<img src="Images/logo.png" class="logo" alt="Logo de las diapositivas" />
+				<h2>Sitios compatibles entre navegadores</h2>
+				<h3>Material Interesante</h3>
+			</div>
+			<div class="content">
+				<div class="content-inner">
+					<div class="vertice">
+						<h1>Material interesante</h1>
+						<h3>A list apart - http://www.alistapart.com</h3>
+						<h3>Smashing Magazine Network -  http://network.smashingmagazine.com</h3>
+						<h3>Can I use -  http://caniuse.com</h3>
+						<h3>HTML 5 Boilerplate - http://html5boilerplate.com/</h3>
+					</div>
+				</div>
+			</div>
+			<ul class="nav">
+				<li><a href="#a1">Primera<a/></li>
+				<li><a href="#a35">Anterior<a/></li>
+				<li><a href="#a39">Siguiente<a/></li>
+				<li><a href="#a39">Última<a/></li>
+			</ul>
+		</div>
+		<div class="section">
+			<a name="a39" id="a39" class="mark-position"><a/>
+			<div class="header grupo">
+				<img src="Images/logo.png" class="logo" alt="Logo de las diapositivas" />
+				<h2>Sitios compatibles entre navegadores</h2>
+				<h3>Mejora progresiva.</h3>
+			</div>
+			<div class="content">
+				<div class="content-inner">
+					<div class="vertice">
+						<div class="center">
+							<br />
+							<br />
+							<br />
+							<br />
+							<br />
+							<br />
+							<br />
+							<h1>FIN</h1>
+						<div>
+					</div>
+				</div>
+			</div>
+			<ul class="nav">
+				<li><a href="#a1">Primera<a/></li>
+				<li><a href="#a35">Anterior<a/></li>
+				<li><a href="#a39">Siguiente<a/></li>
+				<li><a href="#a39">Última<a/></li>
+			</ul>
+		</div>
+    </body>
+</html>
+

@@ -1,0 +1,28 @@
+.inner
+{
+	width:80%;
+	margin:auto;
+}
+.header h1, header h1
+{
+	font-size:250%;
+	position:absolute;
+}
+.floating  h1
+{
+	position:static;
+	display:block;
+	font-size:180%;
+}
+.works li
+{
+	width:48%;
+	margin:0 1%;
+}
+.work-slider-container .inner {
+	width:60%;
+}
+.aptitude li
+{
+	width:31%;
+}

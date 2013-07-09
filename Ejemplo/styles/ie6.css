@@ -1,0 +1,13 @@
+.work-slider-container .inner {
+	width:60%;
+}
+section, .section
+{
+	_height:850px;
+}
+#contact-section{
+	_height:650px;
+}
+#work-section, #about-me-section{
+	_height:1300px;
+}
